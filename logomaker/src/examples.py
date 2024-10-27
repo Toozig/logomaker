@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import gzip
-from logomaker.src.error_handling import check, handle_errors
+from .error_handling import check, handle_errors
 
 # load directory of file
 matrix_dir = os.path.dirname(os.path.abspath(__file__)) \

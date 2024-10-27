@@ -3,8 +3,8 @@ import numpy as np
 import pandas as pd
 from matplotlib.colors import to_rgb
 
-from logomaker.src.error_handling import check
-from logomaker.src.matrix import ALPHABET_DICT
+from .error_handling import check
+from .matrix import ALPHABET_DICT
 
 # Sets default color schemes specified sets of characters
 CHARS_TO_COLORS_DICT = {

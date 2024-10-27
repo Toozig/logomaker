@@ -14,11 +14,11 @@ from matplotlib.patches import Rectangle
 from matplotlib.axes import Axes
 
 # Import stuff from logomaker
-from logomaker.src.Glyph import Glyph
-from logomaker.src.validate import validate_matrix
-from logomaker.src.error_handling import check, handle_errors
-from logomaker.src.colors import get_color_dict, get_rgb
-from logomaker.src.matrix import transform_matrix
+from .Glyph import Glyph
+from .validate import validate_matrix
+from .error_handling import check, handle_errors
+from .colors import get_color_dict, get_rgb
+from .matrix import transform_matrix
 
 
 class Logo:

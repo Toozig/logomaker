@@ -12,8 +12,8 @@ from matplotlib.font_manager import FontManager, FontProperties
 from matplotlib.colors import to_rgb
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
-from logomaker.src.error_handling import check, handle_errors
-from logomaker.src.colors import get_rgb
+from .error_handling import check, handle_errors
+from .colors import get_rgb
 import numpy as np
 
 # Create global font manager instance. This takes a second or two
