@@ -208,7 +208,7 @@ class Glyph:
         # set each attribute passed by user
         for key, value in kwargs.items():
             # if key corresponds to a color, convert to rgb
-            if key in ('color', 'edgecolor', 'background_color'):
+            if key in ('color', 'edgecolor', 'background_color') and value is not None:
                 value = to_rgb(value)
 
             # save variable name
@@ -337,9 +337,9 @@ class Glyph:
         # Create background rectangle if background_color is set
         if self.background_color is not None:
             char_xmin = self.p - self.width / 2.0
-            char_ymin = self.floor
+            char_ymin = self.ax.get_ylim()[0]  # Use the lower y-limit of the axes
             char_width = self.width
-            char_height = self.ceiling - self.floor
+            char_height = self.ax.get_ylim()[1] - self.ax.get_ylim()[0]  # Use full height of axes
             self.background_patch = Rectangle((char_xmin, char_ymin),
                                               char_width,
                                               char_height,
@@ -481,6 +481,7 @@ class Glyph:
         # Validate background_color
         if self.background_color is not None:
             self.background_color = get_rgb(self.background_color)
+
 
 
 
