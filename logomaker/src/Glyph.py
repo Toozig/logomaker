@@ -6,7 +6,7 @@ if sys.version_info[0] == 2:
     matplotlib.use('TkAgg')
 
 from matplotlib.textpath import TextPath
-from matplotlib.patches import PathPatch
+from matplotlib.patches import PathPatch, Rectangle
 from matplotlib.transforms import Affine2D, Bbox
 from matplotlib.font_manager import FontManager, FontProperties
 from matplotlib.colors import to_rgb
@@ -127,6 +127,9 @@ class Glyph:
     figsize: ([float, float]):
         The default figure size for the rendered glyph; only used if ax is
         not supplied by the user.
+
+    background_color: (matplotlib color or None)
+        Color to use for Glyph background. If None, no background is drawn.
     """
 
     @handle_errors
@@ -148,7 +151,8 @@ class Glyph:
                  mirror=False,
                  zorder=None,
                  alpha=1,
-                 figsize=(1, 1)):
+                 figsize=(1, 1),
+                 background_color=None):  # Add background_color parameter
 
         # Set attributes
         self.p = p
@@ -169,6 +173,8 @@ class Glyph:
         self.font_name = font_name
         self.font_weight = font_weight
         self.figsize = figsize
+        self.background_color = background_color  # Add background_color attribute
+        self.background_patch = None  # Add this line
 
         # Check inputs
         self._input_checks()
@@ -194,12 +200,15 @@ class Glyph:
         # remove drawn patch
         if (self.patch is not None) and (self.patch.axes is not None):
             self.patch.remove()
+        
+        # remove background patch if it exists
+        if (self.background_patch is not None) and (self.background_patch.axes is not None):
+            self.background_patch.remove()
 
         # set each attribute passed by user
         for key, value in kwargs.items():
-
             # if key corresponds to a color, convert to rgb
-            if key in ('color', 'edgecolor'):
+            if key in ('color', 'edgecolor', 'background_color'):
                 value = to_rgb(value)
 
             # save variable name
@@ -220,6 +229,10 @@ class Glyph:
         -------
         None.
         """
+
+        # Draw background if it exists
+        if self.background_patch is not None:
+            self.ax.add_patch(self.background_patch)
 
         # Draw character
         if self.patch is not None:
@@ -320,6 +333,20 @@ class Glyph:
 
         # add patch to axes
         self.ax.add_patch(self.patch)
+
+        # Create background rectangle if background_color is set
+        if self.background_color is not None:
+            char_xmin = self.p - self.width / 2.0
+            char_ymin = self.floor
+            char_width = self.width
+            char_height = self.ceiling - self.floor
+            self.background_patch = Rectangle((char_xmin, char_ymin),
+                                              char_width,
+                                              char_height,
+                                              facecolor=self.background_color,
+                                              edgecolor='none',
+                                              zorder=self.zorder-1 if self.zorder is not None else None)
+            self.ax.add_patch(self.background_patch)
 
     def _input_checks(self):
 
@@ -450,5 +477,11 @@ class Glyph:
         check(all([isinstance(n, (int, float)) and n > 0
                    for n in self.figsize]),
               'all elements of figsize array must be numbers > 0.')
+
+        # Validate background_color
+        if self.background_color is not None:
+            self.background_color = get_rgb(self.background_color)
+
+
 
 

@@ -608,6 +608,13 @@ class Logo:
         # update glyph attributes
         g.set_attributes(**kwargs)
 
+        # Redraw the glyph
+        g.draw()
+
+        # If background_color was changed, we need to redraw the entire logo
+        if 'background_color' in kwargs:
+            self.draw(clear=True)
+
     @handle_errors
     def style_glyphs_in_sequence(self,
                                  sequence,
@@ -1137,3 +1144,5 @@ class Logo:
         self.glyph_df = glyph_df
         self.glyph_list = [g for g in self.glyph_df.values.ravel()
                            if isinstance(g, Glyph)]
+
+
