@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=45", "wheel"]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -31,5 +31,8 @@ Documentation = "https://logomaker.readthedocs.io"
 Repository = "https://github.com/jbkinney/logomaker"
 
 [tool.setuptools]
-packages = ["logomaker", "logomaker.tests"]
+packages = find_namespace:
 include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["logomaker*"]
