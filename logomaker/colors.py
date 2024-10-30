@@ -1,9 +1,8 @@
 from __future__ import division
 import numpy as np
-import pandas as pd
 from matplotlib.colors import to_rgb
 
-from .error_handling import check
+from .error_handling import check, handle_errors
 from .matrix import ALPHABET_DICT
 
 # Sets default color schemes specified sets of characters

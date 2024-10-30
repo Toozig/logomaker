@@ -2,7 +2,7 @@ from __future__ import division
 import numpy as np
 import pandas as pd
 
-# Logomaker imports
+# Update these imports
 from .error_handling import check, handle_errors
 from .validate import validate_matrix
 

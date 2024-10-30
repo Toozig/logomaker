@@ -1,9 +1,6 @@
 from __future__ import division
 import numpy as np
 import pandas as pd
-
-# explicitly set a matplotlib backend if called from python to avoid the
-# 'Python is not installed as a framework... error'
 import sys
 if sys.version_info[0] == 2:
     import matplotlib
@@ -13,7 +10,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.axes import Axes
 
-# Import stuff from logomaker
+# Update these imports
 from .Glyph import Glyph
 from .validate import validate_matrix
 from .error_handling import check, handle_errors

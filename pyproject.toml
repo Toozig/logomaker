@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "logomaker"
-version = "0.8.1"
+version = "0.8.2"
 description = "Package for making Sequence Logos"
 readme = "README.md"
 authors = [
@@ -32,4 +32,4 @@ Repository = "https://github.com/jbkinney/logomaker"
 
 [tool.setuptools]
 packages = ["logomaker"]
-include-package-data = true 
+include-package-data = true

@@ -1,5 +1,7 @@
-from __future__ import division
-from functools import wraps
+import functools
+import traceback
+import sys
+import warnings
 
 
 class LogomakerError(Exception):
@@ -80,7 +82,7 @@ def handle_errors(func):
     as expected.
     """
 
-    @wraps(func)  # So wrapped_func has the same docstring, etc., as func
+    @functools.wraps(func)  # So wrapped_func has the same docstring, etc., as func
     def wrapped_func(*args, **kwargs):
 
         # Get should_fail debug flag AND remove should_fail from kwargs dict.

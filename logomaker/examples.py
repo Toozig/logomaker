@@ -1,7 +1,8 @@
-import pandas as pd
 import os
-import gzip
+import pandas as pd
+import numpy as np
 from .error_handling import check, handle_errors
+from .validate import validate_matrix
 
 # load directory of file
 matrix_dir = os.path.dirname(os.path.abspath(__file__)) \
