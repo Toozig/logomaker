@@ -31,5 +31,5 @@ Documentation = "https://logomaker.readthedocs.io"
 Repository = "https://github.com/jbkinney/logomaker"
 
 [tool.setuptools]
-packages = ["logomaker", "logomaker.tests"]
+packages = ["logomaker"]
 include-package-data = true

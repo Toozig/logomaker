@@ -12,7 +12,8 @@ from .examples import list_example_matrices
 from .examples import get_example_matrix
 from .examples import list_example_datafiles
 from .examples import open_example_datafile
-from .tests.functional_tests_logomaker import run_tests
+# Temporarily comment out tests import until we set up the tests directory
+# from .tests.functional_tests_logomaker import run_tests
 
 # demo functions for logomaker
 import matplotlib.pyplot as plt
