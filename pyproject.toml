@@ -31,8 +31,5 @@ Documentation = "https://logomaker.readthedocs.io"
 Repository = "https://github.com/jbkinney/logomaker"
 
 [tool.setuptools]
-packages = find_namespace:
+packages = ["logomaker", "logomaker.tests"]
 include-package-data = true
-
-[tool.setuptools.packages.find]
-include = ["logomaker*"]
