@@ -1,18 +1,18 @@
 # Classes / functions imported with logomaker
-from .src.Logo import Logo
-from .src.Glyph import Glyph
-from .src.Glyph import list_font_names
-from .src.matrix import transform_matrix
-from .src.matrix import sequence_to_matrix
-from .src.matrix import alignment_to_matrix
-from .src.matrix import saliency_to_matrix
-from .src.validate import validate_matrix
-from .src.colors import list_color_schemes
-from .src.examples import list_example_matrices
-from .src.examples import get_example_matrix
-from .src.examples import list_example_datafiles
-from .src.examples import open_example_datafile
-from .tests.functional_tests_logomaker import run_tests
+from logomaker.src.Logo import Logo
+from logomaker.src.Glyph import Glyph
+from logomaker.src.Glyph import list_font_names
+from logomaker.src.matrix import transform_matrix
+from logomaker.src.matrix import sequence_to_matrix
+from logomaker.src.matrix import alignment_to_matrix
+from logomaker.src.matrix import saliency_to_matrix
+from logomaker.src.validate import validate_matrix
+from logomaker.src.colors import list_color_schemes
+from logomaker.src.examples import list_example_matrices
+from logomaker.src.examples import get_example_matrix
+from logomaker.src.examples import list_example_datafiles
+from logomaker.src.examples import open_example_datafile
+from logomaker.tests.functional_tests_logomaker import run_tests
 
 # demo functions for logomaker
 import matplotlib.pyplot as plt
