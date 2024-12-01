@@ -110,6 +110,11 @@ class Logo:
         This governs what other objects drawn on ax will appear in front or
         behind the rendered logo.
 
+        
+    ylim: (None or (float, float))
+        The y-axis limits for the rendered logo. If None, the limits are
+        automatically determined based on the data.
+
     figsize: ([float, float]):
         The default figure size for the rendered logo; only used if ax is
         not supplied by the user.
@@ -137,6 +142,7 @@ class Logo:
                  ax=None,
                  zorder=0,
                  figsize=(10, 2.5),
+                 ylim=None,
                  **kwargs):
 
         # set class attributes
@@ -156,6 +162,7 @@ class Logo:
         self.show_spines = show_spines
         self.zorder = zorder
         self.figsize = figsize
+        self.ylim = ylim
         self.ax = ax
 
         # save other keyword arguments
@@ -325,6 +332,28 @@ class Logo:
         check(all([isinstance(n, (int, float)) and n > 0
                    for n in self.figsize]),
               'all elements of figsize array must be numbers > 0.')
+        
+        # validate ylim
+        if self.ylim is not None:
+            # validate that ylim is array-like
+            check(isinstance(self.ylim, (tuple, list, np.ndarray)),
+                'type(ylim) = %s; ylim must be array-like.' %
+                type(self.ylim))
+            
+            # convert to tuple for consistency
+            self.ylim = tuple(self.ylim)
+            
+            # validate length
+            check(len(self.ylim) == 2,
+                'ylim must have length two.')
+            
+            # validate that elements are numbers
+            check(all([isinstance(n, (int, float)) for n in self.ylim]),
+                'all elements of ylim must be numbers')
+            
+            # validate order
+            check(self.ylim[0] < self.ylim[1],
+                'ylim[0] must be less than ylim[1]')
 
     @handle_errors
     def style_glyphs(self,
@@ -1060,10 +1089,20 @@ class Logo:
         xmax = max([g.p + .5*g.width for g in self.glyph_list])
         self.ax.set_xlim([xmin, xmax])
 
-        # set ylims
-        ymin = min([g.floor for g in self.glyph_list])
-        ymax = max([g.ceiling for g in self.glyph_list])
-        self.ax.set_ylim([ymin, ymax])
+            # set ylims
+        if self.ylim is not None:
+            # Validate ylim format
+            check(isinstance(self.ylim, (list, tuple)) and len(self.ylim) == 2,
+                'ylim must be a list or tuple of length 2')
+            check(self.ylim[0] < self.ylim[1],
+                'ylim[0] must be less than ylim[1]')
+            
+            self.ax.set_ylim(self.ylim)
+        else:
+            # Use default behavior
+            ymin = min([g.floor for g in self.glyph_list])
+            ymax = max([g.ceiling for g in self.glyph_list])
+            self.ax.set_ylim([ymin, ymax])
 
         # style spines if requested
         if self.show_spines is not None:
